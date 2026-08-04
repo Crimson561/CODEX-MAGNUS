@@ -1,4 +1,8 @@
 # 📖 The Living Codex
+> *"Knowledge Preserved. Ideas Forged. Legends Built."*
+
+*A Personal Operating System crafted to capture ideas, preserve knowledge, manage projects, and document the journey of becoming a software engineer.*
+
 
 ## Philosophy
 
@@ -12,11 +16,123 @@ Every interaction should reinforce that feeling.
 
 ---
 
+
+# 🏗️ Architecture
+
+Codex Magnum is designed as a modular Personal Operating System.
+
+Rather than becoming one massive application, it is divided into independent modules that communicate through well-defined interfaces.
+
+Each module should be capable of growing independently without requiring large-scale rewrites of the entire application.
+
+
+## Planned Modules
+
+- 🔐 Authentication
+- 🏠 Dashboard
+- 💡 Idea Vault
+- 📚 Knowledge Vault
+- 🧠 Developer Wiki
+- 🚧 Project Manager
+- 📅 Learning Tracker
+- 📝 Daily Journal
+- 🐛 Bug Archive
+- 💻 Code Snippet Manager
+- 📊 Analytics
+- 🎮 Game Development Vault
+- ⚙️ Settings
+- 🤖 AI Core (Future)
+
+The architecture is designed to evolve as my software engineering skills improve.
+
+
+# 🎯 Engineering Principles
+
+Codex Magnum is built with engineering quality as the highest priority.
+
+Every feature should follow these principles:
+
+- Modular Design
+- Clean Architecture
+- Reusable Components
+- Maintainable Code
+- Responsive Design
+- Accessibility
+- Scalability
+- Security First
+- Performance Focused
+- Thorough Documentation
+
+The objective is not simply to make the application work.
+
+The objective is to build software that reflects professional engineering practices.
+
+
+# 📐 Design Rules
+
+Every feature must answer one simple question.
+
+> "Will this genuinely improve my daily workflow?"
+
+If the answer is no, the feature does not belong inside Codex Magnum.
+
+The goal is not to build the biggest productivity application.
+
+The goal is to build the most useful Personal Operating System for myself.
+
+Features should prioritize usefulness over complexity.
+
+Simplicity should always beat unnecessary functionality.
+
+
+# ⚡ Development Philosophy
+
+Codex Magnum exists to solve my own problems first.
+
+Instead of building features because they are impressive, I will build features because I genuinely need them.
+
+Every new technology I learn should have a purpose.
+
+Whenever possible, new skills will be applied directly to Codex Magnum.
+
+The application will serve as the practical implementation of my learning journey.
+
+
+# 📖 Development Manifesto
+
+Every developer creates projects.
+
+Few create products.
+
+Fewer still create tools they genuinely use every day.
+
+Codex Magnum is intended to become my personal operating system.
+
+It is where ideas begin.
+
+Where knowledge is preserved.
+
+Where projects are managed.
+
+Where mistakes become lessons.
+
+Where progress is measured.
+
+Where creativity is captured.
+
+Every line of code written for Codex Magnum represents another step in my journey as a software engineer.
+
+The application grows because I grow.
+
+When I become a better engineer, Codex Magnum becomes better software.
+
+
 ## ✨ Opening Experience
 
 Instead of displaying a traditional profile avatar or dashboard immediately, users are greeted by an ancient leather-bound book resting peacefully on a desk.
 
 The book serves as the entrance to the entire operating system.
+
 
 ### Idle State
 
@@ -31,6 +147,7 @@ The Codex should appear alive.
 
 ---
 
+
 ## Hover Interaction
 
 When the cursor hovers over the Codex:
@@ -41,6 +158,7 @@ When the cursor hovers over the Codex:
 - The book gently lifts as if recognizing its owner
 
 ---
+
 
 ## Opening Animation
 
@@ -58,6 +176,7 @@ The transition should feel cinematic rather than mechanical.
 
 ---
 
+
 ## Closing Animation
 
 When saving or exiting:
@@ -74,6 +193,7 @@ Nothing should instantly disappear.
 Everything should feel intentional and alive.
 
 ---
+
 
 ## 📜 Navigation
 
@@ -107,6 +227,7 @@ It should feel like exploring chapters of a legendary book.
 
 ---
 
+
 ## 🎨 Visual Identity
 
 ### Theme
@@ -120,6 +241,7 @@ Inspired by:
 - Wizard tomes
 - Renaissance libraries
 - Arcane knowledge
+
 
 ### Colors
 
@@ -135,6 +257,7 @@ Secondary
 - Deep Crimson
 - Emerald Accents
 
+
 ### Typography
 
 Elegant serif typography with luxurious golden headings.
@@ -148,6 +271,7 @@ Suggested fonts:
 The interface should evoke the feeling of reading an illuminated manuscript rather than using traditional software.
 
 ---
+
 
 ## 🔊 Future Audio
 
@@ -169,37 +293,44 @@ Optional ambient sounds:
 It should feel like opening your own legendary Book of Knowledge.
 
 Every animation, transition, color, sound, and interaction should reinforce that illusion.
+
+
+
+# 🧭 Guiding Principle
+
+Technology changes.
+
+Frameworks evolve.
+
+Programming languages rise and fall.
+
+The habit of learning never ends.
+
+Codex Magnum is built around that belief.
+
+Its purpose is not simply to store information.
+
+Its purpose is to become the place where every lesson, every project, every mistake, every success, and every idea is preserved throughout my journey as a software engineer.
+
+The Codex grows because its creator grows.
+
+And every completed chapter is another page written into that story.
+
+
 # 🎯 Project Philosophy
 
-Codex Magnum is my long-term flagship project.
+Codex Magnum is my flagship software engineering project for my first year.
 
-Unlike tutorial projects that are built once and forgotten, this application will evolve throughout my entire software engineering journey.
+It represents everything I learn throughout my first year of software engineering.
 
-Every new technology I learn will be integrated into Codex Magnum.
+Rather than creating one large tutorial project and moving on, I am building a product that solves real problems for its primary user—myself.
 
-Examples:
+Version 1.0 aims to deliver a complete Personal Operating System by the end of my second semester.
 
-Learn React
-→ Improve the frontend.
+After Version 1.0, the primary development cycle will be considered complete.
 
-Learn TypeScript
-→ Refactor for stronger type safety.
+Future versions may continue to evolve as I discover new technologies, better engineering practices, and ideas worth integrating.
 
-Learn Docker
-→ Containerize the application.
-
-Learn AI
-→ Add intelligent assistants.
-
-Learn Electron/Tauri
-→ Build a desktop version.
-
-Learn Mobile Development
-→ Create a companion app.
-
-The goal is not to finish Codex Magnum.
-
-The goal is to continuously evolve it into a true Personal Operating System.
 # 📖 The First Page
 
 When the Codex opens, users are not immediately greeted with a dashboard.
