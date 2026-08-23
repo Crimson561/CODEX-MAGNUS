@@ -320,7 +320,10 @@ button{ font-family:inherit; }
   outline:2px solid var(--brass-bright);
   outline-offset:2px;
 }
-.book.picked{ visibility:hidden; }
+.book.picked{
+  visibility:hidden;
+  pointer-events:none;
+}
 /* the two spines beside a book that was just pulled lean a hair into
    the gap, as if the row's pressure eased — restrained, not cartoonish */
 .book.neighbor-right{ transform: translateZ(0) translateX(3px) rotateZ(calc(var(--tilt, 0deg) + .5deg)); }
@@ -499,13 +502,25 @@ button{ font-family:inherit; }
    STAGE — the focused book
    ========================================================= */
 .stage{
-  position:fixed; inset:0;
+  position:fixed;
+  inset:0;
   z-index:100;
-  display:flex; align-items:center; justify-content:center;
-  perspective: 2000px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:2000px;
   opacity:0;
+  visibility:hidden;
   pointer-events:none;
+  transition:opacity .45s var(--ease), visibility 0s linear .45s;
 }
+
+.stage.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .45s var(--ease), visibility 0s linear 0s;
+} 
 .stage.active{ opacity:1; pointer-events:auto; }
 
 .stage-backdrop{
@@ -522,7 +537,9 @@ button{ font-family:inherit; }
   height: 440px;
   transform-style: preserve-3d;
   transform: rotateX(6deg) rotateY(0deg) rotateZ(0deg);
-  transition: transform .55s var(--ease-settle), opacity .5s ease;
+  transition:
+  transform .55s var(--ease-settle),
+  opacity .45s var(--ease);
 }
 /* the tiny extra bounce once a big move (extraction, descent) finishes */
 @keyframes bookSettle{
