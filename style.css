@@ -321,6 +321,10 @@ button{ font-family:inherit; }
   outline-offset:2px;
 }
 .book.picked{ visibility:hidden; }
+/* the two spines beside a book that was just pulled lean a hair into
+   the gap, as if the row's pressure eased — restrained, not cartoonish */
+.book.neighbor-right{ transform: translateZ(0) translateX(3px) rotateZ(calc(var(--tilt, 0deg) + .5deg)); }
+.book.neighbor-left{ transform: translateZ(0) translateX(-3px) rotateZ(calc(var(--tilt, 0deg) - .5deg)); }
 
 /* the cover face: rounded corners like a real bound edge, cylindrical spine sheen */
 .book-cover-face{

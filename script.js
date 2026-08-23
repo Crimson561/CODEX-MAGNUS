@@ -6,6 +6,7 @@
   'use strict';
 
   const STORAGE_KEY = 'codexMagnusBooks_v1';
+  const SOUND_KEY = 'codexMagnusSoundOn_v1';
   const SPINE_COLORS = [
     '#6b2b2b', '#2f4a3a', '#3a3f6b', '#7a5a2a', '#4a3728',
     '#5c1f1f', '#264a4a', '#6b4423', '#3f2a1a', '#59462f',
@@ -514,6 +515,23 @@
   window.addEventListener('pointerup', onCoverPointerUp);
 
   /* ---------------------------------------------------------
+     Neighbouring books lean subtly into the gap left by a book
+     that has just been pulled from the shelf, as if the row
+     settled a fraction once the pressure of that spine was gone.
+  --------------------------------------------------------- */
+  function nudgeNeighbors(spineEl) {
+    if (reducedMotion) return;
+    const prev = spineEl.previousElementSibling;
+    const next = spineEl.nextElementSibling;
+    if (prev && prev.classList.contains('book')) prev.classList.add('neighbor-right');
+    if (next && next.classList.contains('book')) next.classList.add('neighbor-left');
+    setTimeout(() => {
+      if (prev) prev.classList.remove('neighbor-right');
+      if (next) next.classList.remove('neighbor-left');
+    }, 520);
+  }
+
+  /* ---------------------------------------------------------
      Open / close the stage
   --------------------------------------------------------- */
   function openBookFromShelf(id, spineEl) {
@@ -534,6 +552,7 @@
     updateNav();
     restoreNavButtons();
 
+    nudgeNeighbors(spineEl);
     spineEl.classList.add('picked');
     stage.setAttribute('aria-hidden', 'false');
     stage.classList.add('active');
@@ -711,11 +730,41 @@
   /* ---------------------------------------------------------
      Ambient audio toggle (sfx playback lives in AudioManager above)
   --------------------------------------------------------- */
+  function applySoundPreference(on, { attemptPlay } = { attemptPlay: false }) {
+    audioToggle.setAttribute('data-muted', on ? 'false' : 'true');
+    if (on) {
+      if (attemptPlay) AudioManager.setAmbience(true); // may be blocked until a user gesture — fails silently
+    } else {
+      AudioManager.setAmbience(false);
+    }
+  }
+
   audioToggle.addEventListener('click', () => {
-    const muted = audioToggle.getAttribute('data-muted') !== 'false';
-    audioToggle.setAttribute('data-muted', muted ? 'false' : 'true');
-    AudioManager.setAmbience(muted);
+    const wasMuted = audioToggle.getAttribute('data-muted') !== 'false';
+    const nowOn = wasMuted; // clicking a muted toggle turns sound on
+    applySoundPreference(nowOn, { attemptPlay: true });
+    try { localStorage.setItem(SOUND_KEY, nowOn ? '1' : '0'); } catch (e) {}
   });
+
+  // Restore the remembered preference. Autoplay policies still require a
+  // user gesture before audio can actually start, so if the person left
+  // sound on last visit we quietly try once on their first interaction
+  // with the page rather than failing silently forever.
+  (function restoreSoundPreference() {
+    let remembered = null;
+    try { remembered = localStorage.getItem(SOUND_KEY); } catch (e) {}
+    const wantsSound = remembered === '1';
+    applySoundPreference(wantsSound, { attemptPlay: false });
+    if (wantsSound) {
+      const tryStart = () => {
+        AudioManager.setAmbience(true);
+        document.removeEventListener('pointerdown', tryStart);
+        document.removeEventListener('keydown', tryStart);
+      };
+      document.addEventListener('pointerdown', tryStart, { once: true });
+      document.addEventListener('keydown', tryStart, { once: true });
+    }
+  })();
 
   /* ---------------------------------------------------------
      Ambient dust
