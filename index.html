@@ -1,62 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codex-magnus</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex Magnum — A Living Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="dashboard">
-        <img src="../Assets/logo.png" alt="Menu" id="menu-icon">
-        <section id="dashboard-content">
-            <h2>Dashboard</h2>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Knowledge Base</a></li>
-                <li><a href="#">Ideas</a></li>
-                <li><a href="#">Documentation</a></li>
-            </ul>    
-        </div>
-    <div class="heading">
-        <div class="logo">
-            <img src="../Assets/menu.png" alt="Logo">
-        </div>
-        <h1>CODEX-MAGNUS</h1>
-        <h4><i>"Knowledge Preserved. Ideas Forged. Legends Built."</i></h4>
-        <p>A Personal Operating System crafted to capture ideas, preserve knowledge, manage projects, and document the journey of becoming a software engineer.</p>
+
+<div class="scene" id="scene">
+
+  <!-- ambient light + texture layers -->
+  <div class="light-glow"></div>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="dust" id="dust" aria-hidden="true"></div>
+
+  <!-- branding, mounted like a plaque on the case crown -->
+  <header class="brand">
+    <span class="brand-bracket brand-bracket-l" aria-hidden="true"></span>
+    <div class="brand-plaque" role="img" aria-label="Codex Magnum — Every story has an idea">
+      <span class="brand-name">Codex Magnum</span>
+      <span class="brand-rule" aria-hidden="true"></span>
+      <span class="brand-tagline">Every story has an idea</span>
     </div>
-    <main>
-        <div class="library">
-        <div class="stand"></div>
-        <div class="book">
-            <div class="cover"></div>
-            <div class="pages"></div>
-        </div>
-        </div>
-        <div class="dashboard-left">
-            <!--- all titles from here onwards need a separate page--->
-            <li><a href="#">login</a></li><!--- needs a page to signup for first time users can use a alert sorta msg or integrated page login where the info is updated on database for next login --->
-            <li><a href="#">About</a></li><!--- needs a page to explain the purpose of the project and how it works --->
-            <li><a href="#">Contact</a></li><!--- needs a page with contact information and a form for users to get in touch --->
-            <li><a href="#">Books</a></li><!--- needs a page to display all books sections,topics,subjects,etc --->
-            <li><a href="#">Personal OS</a></li><!--- needs a page to explain the personal operating system and its features  (STILL WORK IN PROGRESS) --->
-        </div>
-        <div class="dashboard-right" class="update-notify">
-            <h1>Update Notification</h1>
-            <p> New features and improvements have been added to enhance your experience. Check out the latest updates and explore the new functionalities!</p>  
-        </div>
-    </main>
-    <footer>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">GitHub</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Discord</a></li>    
-    </footer>
-    
+    <span class="brand-bracket brand-bracket-r" aria-hidden="true"></span>
+  </header>
 
+  <!-- the bookcase -->
+  <main class="bookcase-wrap">
+    <div class="bookcase" id="bookcase">
+      <div class="bookcase-top"></div>
+      <div class="shelves" id="shelves"><!-- shelf rows injected by JS --></div>
+      <div class="bookcase-base"></div>
+    </div>
+  </main>
 
+  <!-- controls, mounted on the case like brass fixtures -->
+  <button class="fixture add-book" id="addBookBtn" title="Add a book to the shelf" aria-label="Add a book">
+    <span>+</span>
+  </button>
 
+  <button class="fixture audio-toggle" id="audioToggle" title="Toggle library ambience" aria-label="Toggle sound" data-muted="true">
+    <svg viewBox="0 0 24 24" class="icon icon-sound" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+      <path class="wave wave1" d="M16.5 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path class="wave wave2" d="M19 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg viewBox="0 0 24 24" class="icon icon-muted" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+      <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+</div>
+
+<!-- focused book stage -->
+<div class="stage" id="stage" aria-hidden="true">
+  <div class="stage-backdrop" id="stageBackdrop"></div>
+
+  <div class="book-3d" id="book3d">
+    <button class="book-close" id="bookClose" aria-label="Close book">×</button>
+
+    <div class="book-pages" id="bookPages">
+      <div class="page page-left" id="pageLeft">
+        <div class="page-content" id="pageLeftContent"></div>
+      </div>
+      <div class="page page-right" id="pageRight">
+        <div class="page-content" id="pageRightContent"></div>
+        <div class="leaf leaf-right" id="leafRight"><div class="page-content" id="leafRightContent"></div></div>
+      </div>
+      <div class="leaf leaf-left" id="leafLeft"><div class="page-content" id="leafLeftContent"></div></div>
+
+      <button class="page-nav page-prev" id="pagePrev" aria-label="Previous page">‹</button>
+      <button class="page-nav page-next" id="pageNext" aria-label="Next page">›</button>
+    </div>
+
+    <div class="book-cover" id="bookCover">
+      <div class="cover-frame">
+        <div class="cover-corner tl"></div>
+        <div class="cover-corner tr"></div>
+        <div class="cover-corner bl"></div>
+        <div class="cover-corner br"></div>
+        <h2 class="cover-title" id="coverTitle">Title</h2>
+        <div class="cover-rule"></div>
+        <p class="cover-author" id="coverAuthor">Author</p>
+        <p class="cover-hint">drag the cover open</p>
+      </div>
+    </div>
+
+    <!-- custom, in-book confirmation — never a browser alert() -->
+    <div class="confirm-veil" id="confirmVeil" aria-hidden="true">
+      <div class="confirm-card" role="alertdialog" aria-modal="true" aria-labelledby="confirmText">
+        <p class="confirm-text" id="confirmText">Remove this book from Codex Magnum?</p>
+        <div class="confirm-actions">
+          <button class="btn" id="confirmCancel" type="button">Cancel</button>
+          <button class="btn btn-danger" id="confirmRemove" type="button">
+            <svg class="trash-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0h10l-.8 12.1a2 2 0 0 1-2 1.9H9.8a2 2 0 0 1-2-1.9L7 7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Remove Book
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="ambience" loop preload="none" src="assets/audio/library-ambience.mp3"></audio>
+<audio id="sfxOpen" preload="none" src="assets/audio/book-open.mp3"></audio>
+<audio id="sfxClose" preload="none" src="assets/audio/book-close.mp3"></audio>
+<audio id="sfxPage" preload="none" src="assets/audio/page-turn.mp3"></audio>
+
+<script src="script.js"></script>
 </body>
 </html>
